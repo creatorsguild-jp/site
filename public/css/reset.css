@@ -1,20 +1,25 @@
 /* @group Reset */
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+}
 
 input, textarea, select {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important; }
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+}
 
 a {
-  text-decoration: none; }
+  text-decoration: none;
+}
 
 ul, ol {
-  list-style: none; }
+  list-style: none;
+}
 
 img {
   vertical-align: top;
   border-style: none;
-  border-width: 0; }
+  border-width: 0;
+}
 
 /* @end */
