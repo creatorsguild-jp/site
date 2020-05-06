@@ -1,4 +1,4 @@
-import {FC, default as React, ReactNode} from 'react'
+import React, {ReactNode, FC} from 'react'
 
 type ContainerProps = {
   title: ReactNode

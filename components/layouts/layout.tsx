@@ -1,19 +1,12 @@
-import * as React from 'react'
+import React, { FC } from 'react'
 import Head from 'next/head'
 import Header from './Header'
 
 type Props = {
   title?: string
-  isHeader?: boolean
-  isFooter?: boolean
 }
 
-const Layout: React.FunctionComponent<Props> = ({
-                                                    children,
-                                                    title = 'Yana Sample Screen Title',
-                                                    isHeader = true,
-                                                    isFooter = true,
-                                                }) => (
+const Layout: FC<Props> = ({children, title = 'Creator\'s Guild'}) => (
   <div>
     <Head>
       <meta charSet="UTF-8"/>
