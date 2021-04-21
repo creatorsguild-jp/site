@@ -2,8 +2,7 @@ import Layout from '../components/layouts/layout'
 import React from 'react'
 import { NextPage } from 'next'
 
-
-const Home: NextPage = props => (
+const Home: NextPage = () => (
   <Layout title="Topページ">
     <section id="content">
       <div className="inbox">
