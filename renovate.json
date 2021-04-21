@@ -1,0 +1,11 @@
+{
+  "extends": [
+    "github>menewdev/renovate-config"
+  ],
+  "gradle": {
+    "enabled": false
+  },
+  "gradle-wrapper": {
+    "enabled": false
+  }
+}

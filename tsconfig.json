@@ -1,22 +1,30 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2020",
+    "module": "es2020",
+    "moduleResolution": "node",
     "lib": [
       "dom",
       "dom.iterable",
       "esnext"
     ],
     "allowJs": true,
-    "skipLibCheck": true,
+    "checkJs": false,
+    "jsx": "preserve",
+    "outDir": "./generated",
     "strict": false,
-    "forceConsistentCasingInFileNames": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "baseUrl": "./",
+    "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "jsx": "preserve"
   },
   "exclude": [
     "node_modules"

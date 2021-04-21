@@ -2,13 +2,13 @@
 
 ## 初期設定
 
-```bash
-yarn install
+```shell
+yarn
 ```
 
 ## 開発用サーバ起動
 
-```bash
+```shell
 yarn dev
 ```
 
@@ -16,4 +16,6 @@ yarn dev
 
 [http://localhost:3000](http://localhost:3000)
 
+## セットアップ情報について
 
+`doc/setup/*.md` を参照

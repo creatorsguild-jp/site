@@ -5,7 +5,6 @@ import { NextPage } from 'next'
 
 const Home: NextPage = props => (
   <Layout title="Topページ">
-
     <section id="content">
       <div className="inbox">
         <div id="sp_main_image">
