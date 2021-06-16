@@ -6,7 +6,7 @@
 npx create-next-app --example with-typescript site
 ```
 
-##.npmrc 追加
+## .npmrc 追加
 
 yarn のデフォルトパラメーターの設定
 
@@ -41,6 +41,14 @@ yarn add -D @typescript-eslint/{parser,eslint-plugin}
 
 ※設定内容については DevelopSettings.md を参考。
 
-## hasky
+## husky / lint-staged
+
+`husky` は git コマンドを実行したときに合わせてコマンドを実行するためのツール。
+`lint-staged` は、Gitのステージに上がっているファイルを対象に `eslint` を実行する為のツール。
+
+```sh
+yarn add -D husky lint-staged
+```
+
 
 
