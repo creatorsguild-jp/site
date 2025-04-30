@@ -1,0 +1,38 @@
+0 info it worked if it ends with ok
+1 verbose cli [
+1 verbose cli   '/nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/bin/node',
+1 verbose cli   '/nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'dev'
+1 verbose cli ]
+2 info using npm@6.14.17
+3 info using node@v14.21.1
+4 verbose run-script [ 'predev', 'dev', 'postdev' ]
+5 info lifecycle creatorsguild@0.1.0~predev: creatorsguild@0.1.0
+6 info lifecycle creatorsguild@0.1.0~dev: creatorsguild@0.1.0
+7 verbose lifecycle creatorsguild@0.1.0~dev: unsafe-perm in lifecycle true
+8 verbose lifecycle creatorsguild@0.1.0~dev: PATH: /nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/home/runner/workspace/node_modules/.bin:/home/runner/workspace/.config/npm/node_global/bin:/home/runner/workspace/node_modules/.bin:/nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/bin:/nix/store/74gix48xijd2d6q6kwgs6jskd7dhv608-pid1/bin:/nix/store/2wdjznxkbxy5qpvrfrx14s23acq5syz5-replit-runtime-path/bin:/home/runner/.nix-profile/bin:/home/runner/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+9 verbose lifecycle creatorsguild@0.1.0~dev: CWD: /home/runner/workspace
+10 silly lifecycle creatorsguild@0.1.0~dev: Args: [ '-c', 'next dev' ]
+11 info lifecycle creatorsguild@0.1.0~dev: Failed to exec dev script
+12 verbose stack Error: creatorsguild@0.1.0 dev: `next dev`
+12 verbose stack spawn ENOENT
+12 verbose stack     at ChildProcess.<anonymous> (/nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/lib/node_modules/npm/node_modules/npm-lifecycle/lib/spawn.js:48:18)
+12 verbose stack     at ChildProcess.emit (events.js:400:28)
+12 verbose stack     at maybeClose (internal/child_process.js:1088:16)
+12 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:296:5)
+13 verbose pkgid creatorsguild@0.1.0
+14 verbose cwd /home/runner/workspace
+15 verbose Linux 6.2.16
+16 verbose argv "/nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/bin/node" "/nix/store/ii9hqvfq3g2vnsybi1vly9s1j9jcna9k-nodejs-14.21.1/bin/npm" "run" "dev"
+17 verbose node v14.21.1
+18 verbose npm  v6.14.17
+19 error code ELIFECYCLE
+20 error syscall spawn
+21 error file sh
+22 error errno ENOENT
+23 error creatorsguild@0.1.0 dev: `next dev`
+23 error spawn ENOENT
+24 error Failed at the creatorsguild@0.1.0 dev script.
+24 error This is probably not a problem with npm. There is likely additional logging output above.
+25 verbose exit [ 1, true ]
