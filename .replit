@@ -9,7 +9,7 @@ run = ["sh", "-c", "npm start"]
 build = ["sh", "-c", "npm run build"]
 
 [workflows]
-runButton = "Run Next.js with Yarn"
+runButton = "Run Next.js"
 
 [[workflows.workflow]]
 name = "Run Next.js"
