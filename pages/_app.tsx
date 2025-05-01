@@ -1,10 +1,9 @@
-import { AppProps, Container } from 'next/app'
+
+import { AppProps } from 'next/app'
 import React from "react"
 
-const App = ({ Component, pageProps }: AppProps) => (
-  <Container>
-    <Component {...pageProps} />
-  </Container>
-)
+function MyApp({ Component, pageProps }: AppProps) {
+  return <Component {...pageProps} />
+}
 
-export default App
+export default MyApp

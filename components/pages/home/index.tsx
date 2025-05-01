@@ -1,8 +1,8 @@
-import Layout from '../../layouts/layout'
 import React from 'react'
 import { NextPage } from 'next'
 import MainImageBlock from "./MainImageBlock";
 import Introduction from "./Introduction";
+import Layout from "../../layouts/layout";
 
 const Home: NextPage = () => (
   <Layout title="Topページ">

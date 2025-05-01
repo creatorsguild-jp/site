@@ -47,3 +47,16 @@ const Introduction: FC = () => {
 }
 
 export default Introduction
+import React, { FC } from 'react'
+
+const Introduction: FC = () => {
+  return (
+    <div className="introduction">
+      <h2>INTRODUCTION</h2>
+      <p>Creator's Guildは作りたいものを作り、困ったときに助け合えるコミュニティです。</p>
+      <p>仲間と一緒にプロジェクトに取り組みながら成長していくことを目指しています。</p>
+    </div>
+  )
+}
+
+export default Introduction
