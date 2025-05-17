@@ -15,4 +15,4 @@ const Home: NextPage = () => (
   </Layout>
 )
 
-export default Homet Home
+export default Home
