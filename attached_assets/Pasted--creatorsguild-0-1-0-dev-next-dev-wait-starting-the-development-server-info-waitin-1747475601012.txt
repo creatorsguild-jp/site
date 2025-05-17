@@ -1,0 +1,63 @@
+> creatorsguild@0.1.0 dev
+> next dev
+
+[ wait ]  starting the development server ...
+[ info ]  waiting on http://localhost:3000 ...
+Browserslist: caniuse-lite is outdated. Please run the following command: `npm update`
+[ info ]  bundled successfully, waiting for typecheck results...
+[ event ] build page: /
+[ wait ]  compiling ...
+[ error ] ./components/pages/home/Introduction.tsx
+SyntaxError: /home/runner/workspace/components/pages/home/Introduction.tsx: Identifier 'React' has already been declared. (50:7)
+
+  48 |
+  49 | export default Introduction
+> 50 | import React, { FC } from 'react'
+     |        ^
+  51 |
+  52 | const Introduction: FC = () => {
+  53 |   return (
+[ event ] build page: /next/dist/pages/_error
+[ wait ]  compiling ...
+[ error ] ./components/pages/home/Introduction.tsx
+SyntaxError: /home/runner/workspace/components/pages/home/Introduction.tsx: Identifier 'React' has already been declared. (50:7)
+
+  48 |
+  49 | export default Introduction
+> 50 | import React, { FC } from 'react'
+     |        ^
+  51 |
+  52 | const Introduction: FC = () => {
+  53 |   return (
+ModuleBuildError: Module build failed (from ./node_modules/next/dist/build/webpack/loaders/next-babel-loader.js):
+SyntaxError: /home/runner/workspace/components/pages/home/Introduction.tsx: Identifier 'React' has already been declared. (50:7)
+
+  48 |
+  49 | export default Introduction
+> 50 | import React, { FC } from 'react'
+     |        ^
+  51 |
+  52 | const Introduction: FC = () => {
+  53 |   return (
+    at constructor (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:19082)
+    at TypeScriptParserMixin.raise (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:178064)
+    at TypeScriptScopeHandler.checkRedeclarationInScope (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:56980)
+    at TypeScriptScopeHandler.declareName (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:56132)
+    at TypeScriptScopeHandler.declareName (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:141196)
+    at TypeScriptParserMixin.declareNameFromIdentifier (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:199448)
+    at TypeScriptParserMixin.checkIdentifier (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:199347)
+    at TypeScriptParserMixin.checkLVal (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:197749)
+    at TypeScriptParserMixin.finishImportSpecifier (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:384943)
+    at TypeScriptParserMixin.parseImportSpecifierLocal (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:384843)
+    at TypeScriptParserMixin.maybeParseDefaultImportSpecifier (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:387523)
+    at TypeScriptParserMixin.parseImportSpecifiersAndAfter (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:383963)
+    at TypeScriptParserMixin.parseImport (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:383787)
+    at TypeScriptParserMixin.parseImport (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:250482)
+    at TypeScriptParserMixin.parseStatementContent (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:345864)
+    at TypeScriptParserMixin.parseStatementContent (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:252927)
+    at /home/runner/workspace/node_modules/webpack/lib/NormalModule.js:316:20
+    at /home/runner/workspace/node_modules/loader-runner/lib/LoaderRunner.js:367:11
+    at /home/runner/workspace/node_modules/loader-runner/lib/LoaderRunner.js:233:18
+    at context.callback (/home/runner/workspace/node_modules/loader-runner/lib/LoaderRunner.js:111:13)
+    at /home/runner/workspace/node_modules/next/dist/compiled/babel-loader/index.js:1:3586
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
