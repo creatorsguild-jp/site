@@ -1,0 +1,55 @@
+
+> creatorsguild@0.1.0 dev
+[ wait ]  starting the development server ...
+[ info ]  waiting on http://localhost:3000 ...
+Browserslist: caniuse-lite is outdated. Please run the following command: `npm update`
+[ info ]  bundled successfully, waiting for typecheck results...
+[ wait ]  compiling ...
+[ info ]  bundled successfully, waiting for typecheck results...
+[ wait ]  compiling ...
+[ event ] build page: /
+[ error ] ./components/pages/home/index.tsx
+SyntaxError: /home/runner/workspace/components/pages/home/index.tsx: Missing semicolon. (18:20)
+
+  16 | )
+  17 |
+> 18 | export default Homet Home
+     |                     ^
+[ wait ]  compiling ...
+[ event ] build page: /next/dist/pages/_error
+[ error ] ./components/pages/home/index.tsx
+SyntaxError: /home/runner/workspace/components/pages/home/index.tsx: Missing semicolon. (18:20)
+
+  16 | )
+  17 |
+> 18 | export default Homet Home
+     |                     ^
+ModuleBuildError: Module build failed (from ./node_modules/next/dist/build/webpack/loaders/next-babel-loader.js):
+SyntaxError: /home/runner/workspace/components/pages/home/index.tsx: Missing semicolon. (18:20)
+
+  16 | )
+  17 |
+> 18 | export default Homet Home
+     |                     ^
+    at constructor (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:19082)
+    at TypeScriptParserMixin.raise (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:178064)
+    at TypeScriptParserMixin.semicolon (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:184433)
+    at TypeScriptParserMixin.parseExportDefaultExpression (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:375840)
+    at TypeScriptParserMixin.parseExportDefaultExpression (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:251905)
+    at TypeScriptParserMixin.parseExport (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:373056)
+    at TypeScriptParserMixin.parseExport (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:251521)
+    at TypeScriptParserMixin.parseStatementContent (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:345900)
+    at TypeScriptParserMixin.parseStatementContent (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:252927)
+    at TypeScriptParserMixin.parseStatementLike (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:343103)
+    at TypeScriptParserMixin.parseModuleItem (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:342582)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:357657)
+    at TypeScriptParserMixin.parseBlockBody (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:357337)
+    at TypeScriptParserMixin.parseProgram (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:339720)
+    at TypeScriptParserMixin.parseTopLevel (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:339383)
+    at TypeScriptParserMixin.parse (/home/runner/workspace/node_modules/@babel/parser/lib/index.js:1:390221)
+    at /home/runner/workspace/node_modules/webpack/lib/NormalModule.js:316:20
+    at /home/runner/workspace/node_modules/loader-runner/lib/LoaderRunner.js:367:11
+    at /home/runner/workspace/node_modules/loader-runner/lib/LoaderRunner.js:233:18
+    at context.callback (/home/runner/workspace/node_modules/loader-runner/lib/LoaderRunner.js:111:13)
+    at /home/runner/workspace/node_modules/next/dist/compiled/babel-loader/index.js:1:3586
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
