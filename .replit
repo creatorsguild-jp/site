@@ -5,11 +5,11 @@ run = "npm run dev"
 channel = "stable-24_05"
 
 [deployment]
-run = ["sh", "-c", "npm start"]
-build = ["sh", "-c", "npm run build"]
+run = ["sh", "-c", "export NODE_OPTIONS=--openssl-legacy-provider && npm start"]
+build = ["sh", "-c", "export NODE_OPTIONS=--openssl-legacy-provider && npm run build"]
 
 [workflows]
-runButton = "Run Next.js"
+runButton = "Run Next.js with Legacy OpenSSL"
 
 [[workflows.workflow]]
 name = "Run Next.js"
@@ -28,6 +28,24 @@ mode = "sequential"
 [[workflows.workflow.tasks]]
 task = "shell.exec"
 args = "yarn dev"
+
+[[workflows.workflow]]
+name = "Run Next.js with Legacy OpenSSL"
+author = 21921035
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export NODE_OPTIONS=--openssl-legacy-provider && npm run dev"
+
+[[workflows.workflow]]
+name = "Run Next.js with Yarn and Legacy OpenSSL"
+author = 21921035
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "export NODE_OPTIONS=--openssl-legacy-provider && yarn dev"
 
 [[ports]]
 localPort = 3000
