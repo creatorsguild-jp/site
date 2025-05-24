@@ -15,12 +15,13 @@ class Document extends NextDocument<Props> {
           <meta name="author" content="クリエイターズギルド Creator's Guild"/>
           <meta property="og:type" content="website"/>
           <meta property="og:url" content="https://creatorsguild.info/"/>
-          <meta property="og:image" content="img/ogg_image.png"/>
+          <meta property="og:image" content="/img/ogg_image.png"/>
           <meta property="og:site_name" content="クリエイターズギルド Creator's Guild"/>
           <meta property="og:locale" content="ja_JP"/>
           <meta property="og:description" content="作りたいものを作り、困ったときに助け合える。そんなコミュニティです。リモート参加OK!"/>
           <link rel="shortcut icon" type="image/vnd.microsoft.icon" href="/img/favicon.ico"/>
           <link rel="apple-touch-icon" href="/img/apple-touch-icon.png"/>
+          <link rel="icon" type="image/png" href="/img/logo@2x.png"/>
         </Head>
         <body>
           <Main />
