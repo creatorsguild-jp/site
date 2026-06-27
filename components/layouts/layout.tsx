@@ -4,6 +4,7 @@ import Header from './Header'
 
 type Props = {
   title?: string
+  children?: React.ReactNode
 }
 
 const Layout: FC<Props> = ({children, title = 'Creator\'s Guild'}) => (

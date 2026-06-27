@@ -7,7 +7,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:dry": "./deploy/deploy-ftp.sh",
+    "deploy": "./deploy/deploy-ftp.sh --apply"
   },
   "dependencies": {
     "next": "^13.4.19",
