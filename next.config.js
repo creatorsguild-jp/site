@@ -3,6 +3,8 @@ const nextConfig = {
   // XServer は静的ホスティング（Node/SSR 非対応）のため静的エクスポートする。
   // next build が out/ に静的 HTML/CSS/JS を生成する。
   output: 'export',
+  // Apache のディレクトリ配信に整合（/project/ → out/project/index.html）。複数ページ化に必要。
+  trailingSlash: true,
   // 静的エクスポートでは画像最適化サーバが無いため unoptimized が必要（next/image 使用時）。
   images: { unoptimized: true },
   // styled-components の SWC トランスフォーム（SSR一貫性・デバッグ向上。デザインは不変）。

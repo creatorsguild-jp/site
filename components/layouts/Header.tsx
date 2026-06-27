@@ -1,5 +1,5 @@
 import React, {ReactNode, FC} from 'react'
-import { nav } from '../../content/site'
+import { nav, contactHref } from '../../content/site'
 
 type ContainerProps = {
   title: ReactNode
@@ -45,7 +45,7 @@ const Component: FC<Props> = () => (
           </ul>
 
           <div className={"pc_mail"}>
-            <a href={"mailto:dummy@example.com"}>
+            <a href={contactHref}>
               <dl>
                 <dt><img src={"/img/pict_mail@2x.png"} alt={""} /></dt>
                 <dd>メンバー随時<br/>募集中</dd>

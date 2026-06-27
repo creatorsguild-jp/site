@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import ContactButton from '../../ui/ContactButton'
+import { contactHref } from '../../../content/site'
 
 // ヒーロー（旧 MainImageBlock）。SP/PC の 2 系統。出力は従来と不変。
 const Hero: FC = () => (
@@ -13,7 +14,7 @@ const Hero: FC = () => (
         <dt><img src="img/sp_title_top_image@2x.png" alt=""/></dt>
         <dd>作りたいものを作り、困ったときに助け合える。そんなコミュニティです。リモート参加OK!</dd>
       </dl>
-      <ContactButton href="#linkURL" />
+      <ContactButton href={contactHref} />
     </div>
 
     <div id="pc_main_image">

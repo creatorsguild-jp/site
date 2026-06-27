@@ -6,12 +6,15 @@ export type NavItem = {
   href: string
 }
 
-// ヘッダー PC メニュー。現状の href は旧静的サイト由来（*.html）。
-// Phase4 でページ実体化に合わせて更新予定。
+// ヘッダー PC メニュー。複数ページ化（Phase4）で実ルートへ更新済み。
+// trailingSlash:true のため末尾スラッシュ付き（/project/ → out/project/index.html）。
 export const nav: NavItem[] = [
-  { label: 'HOME', href: 'index.html' },
-  { label: 'プロジェクト紹介', href: 'project.html' },
-  { label: 'リモート参加について', href: 'remote.html' },
-  { label: 'メンバー紹介', href: 'member.html' },
-  { label: 'お問い合わせ', href: 'contact.html' },
+  { label: 'HOME', href: '/' },
+  { label: 'プロジェクト紹介', href: '/project/' },
+  { label: 'リモート参加について', href: '/remote/' },
+  { label: 'メンバー紹介', href: '/member/' },
+  { label: 'お問い合わせ', href: '/contact/' },
 ]
+
+// メンバー募集 / 問い合わせの導線（CTA）の遷移先。死にアンカー(#linkURL/#linlURL)を置換。
+export const contactHref = '/contact/'

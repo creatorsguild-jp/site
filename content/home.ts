@@ -1,6 +1,8 @@
 // トップページのコンテンツ（文言・画像・リンク）をここに集約する。
 // コンポーネントは描画に専念し、文言修正はこのファイルで完結させる（D3: TS/JSON データ化）。
-// ※ 出力不変を保つため、既存マークアップに現れるテキスト/属性をそのまま保持する。
+// ※ 既存マークアップに現れるテキスト/属性は基本そのまま保持する。
+
+import { contactHref } from './site'
 
 // リッチテキスト（段落内のインライン強調・改行）を表すノード。
 //   文字列      → テキスト
@@ -67,7 +69,7 @@ export const introSections: IntroSectionData[] = [
     paragraphs: [
       ['ちょっとしたスキルを学びたい。一緒に学習したいという方、ぜひお問い合わせフォームからご連絡ください！'],
     ],
-    contactHref: '#linlURL',
+    contactHref,
     image: { className: 'forth', src: 'img/pc_4thview_illust@2x.png', alt: '' },
   },
 ]
