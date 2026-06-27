@@ -28,5 +28,14 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# FTP / deploy credentials (never commit)
+.env
+.env.ftp
+
 # ESLint
 .eslintcache
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
