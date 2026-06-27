@@ -49,16 +49,18 @@
 - 複数ページ案: `/`, `/project`, `/remote`, `/member`, `/contact`（各 `pages/*.tsx`）
   - 静的配信のため、内部リンクは `next/link` を用い、`trailingSlash: true` 化で Apache のディレクトリ配信(`/project/` → `out/project/index.html`)に整合させる（要検討）。
 
-### 3.2 コンポーネント構成（機能/パーツ別・出力不変リファクタと両立）
+### 3.2 コンポーネント構成（機能/パーツ別・出力不変リファクタと両立）✅Phase2実施済
 ```
 components/
-├── layouts/        共通レイアウト（Layout, Header, Footer）
-├── sections/       LP のセクション単位（Hero, About, Share, Join …）
-└── ui/             再利用パーツ（ContactButton, SectionTitle, Image …）
+├── layouts/            共通レイアウト（layout, Header, Footer）
+├── ui/                 再利用パーツ（ContactButton …）
+└── pages/<page>/       ページ単位。配下にそのページのセクション部品を置く（複数ページ化に整合）
+    └── home/           index, Hero, IntroProject, IntroShare, IntroJoin
 ```
-- 現 `MainImageBlock` / `Introduction` を**セクション単位に分割**（`Hero`, `IntroProject`, `IntroShare`, `IntroJoin`）。
-- 共通の「メンバー募集ボタン」を `ui/ContactButton` に抽出（現状ヒーローと紹介で重複）。
-- **既存の見た目(HTML/CSS)は不変**を原則とし、内部分割のみ（= 既存デザインは変えない）。
+- 旧 `MainImageBlock` → `pages/home/Hero`、旧 `Introduction` → `IntroProject`/`IntroShare`/`IntroJoin` に分割。
+- 共通の「メンバー募集ボタン」を `ui/ContactButton`（href プロップ）に抽出（ヒーローと募集で共用）。
+- 空フッターを `layouts/Footer` に抽出。
+- **出力不変を厳密検証**: リファクタ前後で `out/*.html` を正規化（buildId/チャンクハッシュ除去）して diff → 完全一致。
 
 ### 3.3 コンテンツ戦略 — ★要確認（§7）
 現状はコピーが JSX 直書き。完成・保守性のための選択肢:

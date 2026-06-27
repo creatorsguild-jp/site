@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import Head from 'next/head'
 import Header from './Header'
+import Footer from './Footer'
 
 type Props = {
   title?: string
@@ -22,8 +23,7 @@ const Layout: FC<Props> = ({children, title = 'Creator\'s Guild'}) => (
         {children}
       </div>
     </section>
-    <footer id={"footer"}>
-    </footer>
+    <Footer />
   </div>
 )
 
