@@ -1,19 +1,18 @@
 import React from 'react'
 import { NextPage } from 'next'
 import Hero from "./Hero";
-import IntroProject from "./IntroProject";
-import IntroShare from "./IntroShare";
-import IntroJoin from "./IntroJoin";
+import IntroSection from "./IntroSection";
 import Layout from "../../layouts/layout";
+import { introSections } from "../../../content/home";
 
 const Home: NextPage = () => (
   <Layout title="Topページ">
     <section id="content">
       <div className="inbox">
         <Hero />
-        <IntroProject />
-        <IntroShare />
-        <IntroJoin />
+        {introSections.map((section) => (
+          <IntroSection key={section.id} section={section} />
+        ))}
       </div>
     </section>
   </Layout>

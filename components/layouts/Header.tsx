@@ -1,4 +1,5 @@
 import React, {ReactNode, FC} from 'react'
+import { nav } from '../../content/site'
 
 type ContainerProps = {
   title: ReactNode
@@ -38,11 +39,9 @@ const Component: FC<Props> = () => (
           </dl>
 
           <ul className={"pc_head_menu"}>
-            <li><a href={"index.html"}>HOME</a></li>
-            <li><a href={"project.html"}>プロジェクト紹介</a></li>
-            <li><a href={"remote.html"}>リモート参加について</a></li>
-            <li><a href={"member.html"}>メンバー紹介</a></li>
-            <li><a href={"contact.html"}>お問い合わせ</a></li>
+            {nav.map((item) => (
+              <li key={item.href}><a href={item.href}>{item.label}</a></li>
+            ))}
           </ul>
 
           <div className={"pc_mail"}>
