@@ -45,10 +45,18 @@ npm run build                                                            # out/ 
 #   （deploy-ftp.sh は秘匿事故防止のため contact.config.php を mirror から除外している）
 ```
 
+## Phase6 品質（`site-gwm.9`）— 一部着手
+| 項目 | 状態 |
+|---|---|
+| ページ別メタ/OGP/canonical | ✅ 実装済（`content/site.ts` pageMeta + `layout.tsx` で next/head 出力。全ページ title/description/og:url 一意・重複0） |
+| 内部リンク切れ | ✅ 監査済（`out/` の href/src を全走査、欠落0） |
+| レスポンシブ確認 | ⬜ 未（実機/ブラウザ確認が必要） |
+| Lighthouse | ⬜ 未（Chrome 必要） |
+| フォーム実送信テスト | ⬜ 未（本番 SMTP/reCAPTCHA 設定後） |
+
 ## その後
-- Phase6 品質（`site-gwm.9`）: ページ別メタ/OGP、レスポンシブ、Lighthouse、リンク切れ、**フォーム実送信テスト**（本番 SMTP/reCAPTCHA 設定後）
 - 本番反映（`site-gwm.3`）: `./deploy/deploy-ftp.sh`（dry-run → `--apply`）。`out/api/` に PHP/vendor が含まれることを確認してから反映（旧2020サイトを置換）
-- 任意の残データ化: Hero copy/images・meta/OGP を content/ へ
+- 任意の残データ化: Hero copy/images を content/ へ
 
 ## よく使うコマンド
 ```bash
