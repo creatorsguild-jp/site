@@ -1,12 +1,13 @@
-import React from 'react'
-import { NextPage } from 'next'
-import Hero from "./Hero";
-import IntroSection from "./IntroSection";
-import Layout from "../../layouts/layout";
-import { introSections } from "../../../content/home";
+import React from 'react';
+import { NextPage } from 'next';
+import Hero from './Hero';
+import IntroSection from './IntroSection';
+import Layout from '../../layouts/layout';
+import { introSections } from '../../../content/home';
+import { pageMeta } from '../../../content/site';
 
 const Home: NextPage = () => (
-  <Layout title="Topページ">
+  <Layout meta={pageMeta.home}>
     <section id="content">
       <div className="inbox">
         <Hero />
@@ -16,6 +17,6 @@ const Home: NextPage = () => (
       </div>
     </section>
   </Layout>
-)
+);
 
-export default Home
+export default Home;

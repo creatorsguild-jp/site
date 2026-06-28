@@ -10,6 +10,7 @@ import {
   recaptchaAction,
   recaptchaSiteKey,
 } from '../content/contact';
+import { pageMeta } from '../content/site';
 
 // grecaptcha は外部スクリプトで window に注入される。
 declare global {
@@ -96,7 +97,7 @@ const ContactPage: NextPage = () => {
   );
 
   return (
-    <Layout title={contactCopy.title}>
+    <Layout meta={pageMeta.contact}>
       {recaptchaSiteKey && (
         <Script
           src={`https://www.google.com/recaptcha/api.js?render=${recaptchaSiteKey}`}
