@@ -54,6 +54,10 @@ if [[ ! -f out/index.html ]]; then
 fi
 
 # 2) FTP 同期（mirror -R: ローカル→リモート, --delete: out/ に無い旧ファイルを掃除）
+#    contact.config.php（SMTP/reCAPTCHA 認証, git 追跡外）は mirror から除外する:
+#    - 自動デプロイで秘匿設定を上書き/--delete 掃除しない（事故防止）
+#    - 初回のみ手動で public_html/api/contact.config.php を FTP アップロードすること
+#      （テンプレ: public/api/contact.config.example.php）
 DRY="--dry-run"
 [[ "$APPLY" -eq 1 ]] && DRY=""
 if [[ "$APPLY" -eq 0 ]]; then
@@ -68,6 +72,7 @@ set ftp:ssl-protect-data yes
 set mirror:no-empty-dirs yes
 mirror -R $DRY --delete --verbose --parallel=4 \
     --exclude-glob .DS_Store \
+    --exclude-glob contact.config.php \
     out/ \
     ${FTP_REMOTE_DIR}/
 quit

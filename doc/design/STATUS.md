@@ -1,6 +1,6 @@
 # 作業ステータス / 再開ガイド（Resume）
 
-> 最終更新: 2026-06-28。次回はこのファイル + `bd ready` を見れば続きから再開できる。
+> 最終更新: 2026-06-28（Phase5 コード実装完了）。次回はこのファイル + `bd ready` を見れば続きから再開できる。
 
 ## いまの状態
 - ブランチ: **`chore/ftp-deploy`**（origin 未 push・ローカルコミット済み）
@@ -15,23 +15,38 @@
 | Phase2 リファクタ | `components/{layouts,ui,pages/home}` にパーツ分割（出力不変） | `75b759e` |
 | Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（出力不変） | `d33bbe9` |
 | Phase4 複数ページ化 | `/project /remote /member /contact` 追加・nav 実リンク化・死にアンカー解消 | `142c1fa` |
+| Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | （本コミット） |
 
-サイト現状: 5ページ（`/ /project/ /remote/ /member/ /contact/`）。`/project /remote /member` は「準備中」雛形、`/contact` はフォーム雛形（honeypot + 各項目、`action="/api/contact.php"`）。
+サイト現状: 5ページ（`/ /project/ /remote/ /member/ /contact/`）。`/project /remote /member` は「準備中」雛形、`/contact` は**実働フォーム**（fetch→`/api/contact.php`、honeypot + reCAPTCHA v3 + サーバ側検証）。コードは完成、稼働には下記の秘匿情報入力が必要。
 
-## 次にやること → Phase5: PHPフォーム（beads `site-gwm.8`）
-`/contact/` のフォームを実際に動かす。実装方針（確定済）:
-- `public/api/contact.php`（vanilla 単一エンドポイント）→ `next build` で `out/api/` に出力され既存FTPパイプラインで反映
-- **PHPMailer**（XServer SMTP）でメール送信。vendor は `public/api/vendor/` に同梱
-- **honeypot + reCAPTCHA v3**、サーバ側バリデーション
-- フロント `/contact/` フォームから同一ドメインへ POST（CORS不要）
+## Phase5 実装内容（コード完了 / beads `site-gwm.8`）
+- `public/api/contact.php` — vanilla 単一エンドポイント。JSON 応答。検証: 必須/メール形式/honeypot/reCAPTCHA v3/同一オリジン/連投フラッド。送信: PHPMailer(SMTP)。
+- `public/api/vendor/PHPMailer/` — PHPMailer v6.9.1 同梱（git コミット済）。
+- `public/api/contact.config.example.php` — 設定テンプレ（受信先/SMTP/reCAPTCHA/許可オリジン）。実値は `contact.config.php`（**git 外**）。
+- `public/api/.htaccess` — `*.config.php` と `vendor/` への直アクセス拒否（多層防御）。
+- `pages/contact.tsx` + `content/contact.ts` — fetch+JSON 送信、reCAPTCHA v3 トークン取得、結果/エラー表示。JS 無効時は通常 POST にフォールバック。
+- Docker(php:8.2) で 405/honeypot/422/429/500 の各経路を動作確認済（PHP fatal/情報漏洩なし）。
 
-### 🔑 着手前にユーザーから入手が必要（未取得）
-1. 受信先メールアドレス（例 `info@creatorsguild.info` の実在ボックス）
-2. XServer SMTP 認証（host / port / user / pass）→ `.env`（git外）で管理
-3. reCAPTCHA v3 サイトキー / シークレット（Google reCAPTCHA 管理画面で登録）
+### 🔑 稼働させるためにユーザー入力が必要（コードは外部設定を待つだけ）
+1. **受信先メール**: `public/api/contact.config.php` の `to_email`（実在ボックス）
+2. **XServer SMTP**: 同ファイル `smtp.host/port/secure/username/password`（587=tls / 465=ssl）
+3. **reCAPTCHA v3**:
+   - シークレット → `contact.config.php` の `recaptcha.secret`（サーバ側）
+   - サイトキー → `.env.local` の `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`（フロント・ビルド時埋込）
+   - ※ どちらも未設定なら reCAPTCHA はスキップされフォームは動作する（メール設定だけで稼働可）
+
+### Phase5 デプロイ手順（設定後）
+```bash
+cp public/api/contact.config.example.php public/api/contact.config.php  # 実値を記入（git 外）
+cp .env.local.example .env.local                                         # サイトキー記入（任意）
+npm run build                                                            # out/ 生成（config は --delete 対象外）
+./deploy/deploy-ftp.sh --apply                                           # 反映
+# 初回のみ: public_html/api/contact.config.php を手動 FTP アップロード
+#   （deploy-ftp.sh は秘匿事故防止のため contact.config.php を mirror から除外している）
+```
 
 ## その後
-- Phase6 品質（`site-gwm.9`）: ページ別メタ/OGP、レスポンシブ、Lighthouse、リンク切れ、フォーム実送信テスト
+- Phase6 品質（`site-gwm.9`）: ページ別メタ/OGP、レスポンシブ、Lighthouse、リンク切れ、**フォーム実送信テスト**（本番 SMTP/reCAPTCHA 設定後）
 - 本番反映（`site-gwm.3`）: `./deploy/deploy-ftp.sh`（dry-run → `--apply`）。`out/api/` に PHP/vendor が含まれることを確認してから反映（旧2020サイトを置換）
 - 任意の残データ化: Hero copy/images・meta/OGP を content/ へ
 

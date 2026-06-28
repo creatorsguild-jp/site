@@ -534,3 +534,35 @@ section#content {
 
   /* @content */
 }
+
+/* ------------------------------------------
+  お問い合わせフォーム 送信結果 / バリデーション（Phase5）
+--------------------------------------------- */
+.form-success {
+  margin: 1em 0;
+  padding: 0.8em 1em;
+  border: 1px solid #5a9e6f;
+  border-radius: 4px;
+  background: #eef7f0;
+  color: #2f6b43;
+}
+
+.form-error {
+  display: block;
+  margin-top: 0.3em;
+  color: #c0392b;
+  font-size: 0.9em;
+}
+
+.recaptcha-note {
+  margin-top: 1em;
+  color: #888;
+  font-size: 0.75em;
+  line-height: 1.6;
+}
+
+.recaptcha-note a {
+  color: #888;
+  text-decoration: underline;
+}
+

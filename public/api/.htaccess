@@ -1,0 +1,15 @@
+# creatorsguild.info /api/ アクセス制御（XServer / Apache）
+# - 設定ファイル（*.config.php）への直接アクセスを拒否（万一の情報漏洩防止の多層防御）
+# - vendor 配下（PHPMailer 等ライブラリ）への直接アクセスを拒否
+# contact.php からの require は同一プロセス内のファイル読み込みなので影響を受けない。
+
+# 設定ファイルを直接叩かせない
+<FilesMatch "\.config\.php$">
+    Require all denied
+</FilesMatch>
+
+# ライブラリの直アクセス拒否（Apache 2.4 系）
+RedirectMatch 404 ^/api/vendor/.*$
+
+# ディレクトリ一覧の無効化
+Options -Indexes
