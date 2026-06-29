@@ -7,7 +7,14 @@ import {
   composeCanonicalUrl,
   composePageTitle,
   pageMeta,
+  siteName,
+  siteUrl,
 } from '../../content/site';
+import {
+  buildOrganization,
+  buildWebSite,
+  serializeJsonLd,
+} from '../../lib/structured-data';
 
 type Props = {
   // ページ別メタ（未指定時はホームを既定にする）。
@@ -18,6 +25,25 @@ type Props = {
 const Layout: FC<Props> = ({ children, meta = pageMeta.home }) => {
   const fullTitle = composePageTitle(meta);
   const ogUrl = composeCanonicalUrl(meta);
+  const isHome = meta.path === '/';
+
+  // 構造化データ: 組織情報は全ページ、WebSite はトップのみ。
+  const organizationLd = serializeJsonLd(
+    buildOrganization({
+      name: siteName,
+      url: siteUrl,
+      logoPath: '/img/logo@2x.png',
+    }),
+  );
+  const websiteLd = isHome
+    ? serializeJsonLd(
+        buildWebSite({
+          name: siteName,
+          url: siteUrl,
+          description: pageMeta.home.description,
+        }),
+      )
+    : null;
 
   return (
     <div>
@@ -33,6 +59,18 @@ const Layout: FC<Props> = ({ children, meta = pageMeta.home }) => {
         />
         <meta property="og:url" content={ogUrl} key="og:url" />
         <link rel="canonical" href={ogUrl} key="canonical" />
+        <script
+          type="application/ld+json"
+          key="ld-organization"
+          dangerouslySetInnerHTML={{ __html: organizationLd }}
+        />
+        {websiteLd && (
+          <script
+            type="application/ld+json"
+            key="ld-website"
+            dangerouslySetInnerHTML={{ __html: websiteLd }}
+          />
+        )}
         <link
           rel="stylesheet"
           type="text/css"

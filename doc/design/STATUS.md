@@ -50,6 +50,8 @@ npm run build                                                            # out/ 
 | 項目 | 状態 |
 |---|---|
 | ページ別メタ/OGP/canonical | ✅ 実装済（`content/site.ts` pageMeta + `layout.tsx` で next/head 出力。全ページ title/description/og:url 一意・重複0） |
+| robots.txt / sitemap.xml | ✅ 実装済（`public/robots.txt` + `public/sitemap.xml` 5URL。pageMeta との同期は integration テストで保証） |
+| 構造化データ（JSON-LD） | ✅ 実装済（全ページに Organization、ホームのみ WebSite を追加注入） |
 | 内部リンク切れ | ✅ 監査済（`out/` の href/src を全走査、欠落0） |
 | レスポンシブ確認 | ⬜ 未（実機/ブラウザ確認が必要） |
 | Lighthouse | ⬜ 未（Chrome 必要） |
