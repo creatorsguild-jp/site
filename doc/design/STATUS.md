@@ -13,7 +13,7 @@
 | デプロイ体制 | `next.config.js`(static export) + `deploy/deploy-ftp.sh`(dry-run/--apply) + `npm run deploy` | `c42d5a9` |
 | 設計/技術選定 | `doc/design/README.md`(決定 D1–D8) + `tech-selection.md` | `626d939` |
 | Phase2 リファクタ | `components/{layouts,ui,pages/home}` にパーツ分割（出力不変） | `75b759e` |
-| Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（出力不変） | `d33bbe9` |
+| Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（intro/nav/Hero まで・出力不変） | `d33bbe9` ほか |
 | Phase4 複数ページ化 | `/project /remote /member /contact` 追加・nav 実リンク化・死にアンカー解消 | `142c1fa` |
 | Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | （本コミット） |
 
@@ -56,7 +56,6 @@ npm run build                                                            # out/ 
 
 ## その後
 - 本番反映（`site-gwm.3`）: `./deploy/deploy-ftp.sh`（dry-run → `--apply`）。`out/api/` に PHP/vendor が含まれることを確認してから反映（旧2020サイトを置換）
-- 任意の残データ化: Hero copy/images を content/ へ
 
 ## よく使うコマンド
 ```bash

@@ -4,6 +4,47 @@
 
 import { contactHref } from './site'
 
+// 画像参照（src/alt）。
+export type HeroImage = { src: string; alt: string }
+
+// ヒーロー（旧 MainImageBlock）の SP/PC 2 系統を構造化したデータ。
+// 既存 HTML の構造・テキスト・属性を保持したまま、データだけ抜き出した形。
+// - backIllust は SP/PC で共有（src/alt とも共通）
+// - titleId は src 共通だが alt が SP/PC で異なるため別エントリ
+// - SP の copy は単一文字列、PC は <br/> で 2 行に分かれるので配列
+export type HeroData = {
+  contactHref: string
+  backIllust: HeroImage
+  sp: {
+    titleId: HeroImage
+    titleTop: HeroImage
+    copy: string
+  }
+  pc: {
+    titleId: HeroImage
+    titleTop: HeroImage
+    copyLines: [string, string]
+  }
+}
+
+export const hero: HeroData = {
+  contactHref,
+  backIllust: { src: 'img/1stview_illust@2x.png', alt: '' },
+  sp: {
+    titleId: { src: 'img/pc_site_id@2x.png', alt: '' },
+    titleTop: { src: 'img/sp_title_top_image@2x.png', alt: '' },
+    copy: '作りたいものを作り、困ったときに助け合える。そんなコミュニティです。リモート参加OK!',
+  },
+  pc: {
+    titleId: { src: 'img/pc_site_id@2x.png', alt: "プロジェクト開発型勉強会 Creator's Guild" },
+    titleTop: { src: 'img/pc_title_top_image@2x.png', alt: '' },
+    copyLines: [
+      '作りたいものを作り、困ったときに助け合える',
+      'そんなコミュニティです。リモート参加OK!',
+    ],
+  },
+}
+
 // リッチテキスト（段落内のインライン強調・改行）を表すノード。
 //   文字列      → テキスト
 //   { strong } → <strong>...</strong>（class なし）
