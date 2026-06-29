@@ -24,10 +24,13 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "isolatedModules": true
+    "isolatedModules": true,
+    "incremental": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "vitest.config.ts",
+    "tests"
   ],
   "include": [
     "next-env.d.ts",

@@ -1,14 +1,8 @@
-import React, {ReactNode, FC} from 'react'
+import React, { FC } from 'react'
+import { nav, contactHref } from '../../content/site'
 
-type ContainerProps = {
-  title: ReactNode
-  preTitle?: ReactNode
-  postTitle?: ReactNode
-}
-
-type Props = {} & ContainerProps
-
-const Component: FC<Props> = () => (
+// ヘッダー（SP/PC 2 系統）。nav は content/site.ts から駆動。出力は従来と不変。
+const Header: FC = () => (
   <header id={"header"}>
     <div className={"sp_header"}>
       <div className={"inbox clfx"}>
@@ -38,15 +32,13 @@ const Component: FC<Props> = () => (
           </dl>
 
           <ul className={"pc_head_menu"}>
-            <li><a href={"index.html"}>HOME</a></li>
-            <li><a href={"project.html"}>プロジェクト紹介</a></li>
-            <li><a href={"remote.html"}>リモート参加について</a></li>
-            <li><a href={"member.html"}>メンバー紹介</a></li>
-            <li><a href={"contact.html"}>お問い合わせ</a></li>
+            {nav.map((item) => (
+              <li key={item.href}><a href={item.href}>{item.label}</a></li>
+            ))}
           </ul>
 
           <div className={"pc_mail"}>
-            <a href={"mailto:dummy@example.com"}>
+            <a href={contactHref}>
               <dl>
                 <dt><img src={"/img/pict_mail@2x.png"} alt={""} /></dt>
                 <dd>メンバー随時<br/>募集中</dd>
@@ -59,10 +51,4 @@ const Component: FC<Props> = () => (
   </header>
 )
 
-const Container: FC<ContainerProps> = (props) => {
-  return <Component {...props} />
-}
-
-Container.displayName = 'Header'
-
-export default Container
+export default Header

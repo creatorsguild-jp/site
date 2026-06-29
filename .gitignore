@@ -28,5 +28,18 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 
+# FTP / deploy credentials (never commit)
+.env
+.env.ftp
+
+# お問い合わせフォームの実設定（SMTP/reCAPTCHA 認証を含む・never commit）
+# テンプレートは public/api/contact.config.example.php を参照
+/public/api/contact.config.php
+
 # ESLint
 .eslintcache
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
