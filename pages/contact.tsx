@@ -4,49 +4,23 @@ import Script from 'next/script';
 import Layout from '../components/layouts/layout';
 import {
   contactCopy,
-  contactEndpoint,
   contactFields,
   honeypotField,
-  recaptchaAction,
   recaptchaSiteKey,
 } from '../content/contact';
 import { pageMeta } from '../content/site';
-
-// grecaptcha は外部スクリプトで window に注入される。
-declare global {
-  interface Window {
-    grecaptcha?: {
-      ready: (cb: () => void) => void;
-      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
-    };
-  }
-}
+import {
+  buildContactPayload,
+  contactEndpoint,
+  getRecaptchaToken,
+  parseContactResponse,
+} from '../lib/contact-form';
 
 type Status = 'idle' | 'sending' | 'success' | 'error';
 type FieldErrors = Partial<Record<'name' | 'email' | 'message', string>>;
 
-// reCAPTCHA v3 トークンを取得する。サイトキー未設定や未ロード時は空文字を返す（=検証スキップ運用）。
-function getRecaptchaToken(): Promise<string> {
-  if (
-    !recaptchaSiteKey ||
-    typeof window === 'undefined' ||
-    !window.grecaptcha
-  ) {
-    return Promise.resolve('');
-  }
-  const grecaptcha = window.grecaptcha;
-  return new Promise((resolve) => {
-    grecaptcha.ready(() => {
-      grecaptcha
-        .execute(recaptchaSiteKey, { action: recaptchaAction })
-        .then(resolve)
-        .catch(() => resolve(''));
-    });
-  });
-}
-
 // お問い合わせ / メンバー募集フォーム。
-// 送信は同一ドメインの PHP（/api/contact.php）へ JSON POST（CORS 不要）。
+// 送信ロジックは lib/contact-form.ts に集約済み。ここでは描画とイベント結線のみ。
 // JS 無効時も action/method により通常 POST にフォールバックする。
 const ContactPage: NextPage = () => {
   const [status, setStatus] = useState<Status>('idle');
@@ -63,31 +37,26 @@ const ContactPage: NextPage = () => {
 
       const form = e.currentTarget;
       const fd = new FormData(form);
-      const payload: Record<string, string> = {
-        name: String(fd.get('name') ?? ''),
-        email: String(fd.get('email') ?? ''),
-        message: String(fd.get('message') ?? ''),
-        [honeypotField]: String(fd.get(honeypotField) ?? ''),
-      };
 
       try {
-        payload.recaptcha_token = await getRecaptchaToken();
+        const token = await getRecaptchaToken();
+        const payload = buildContactPayload(fd, token);
         const res = await fetch(contactEndpoint, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
         });
-        const data = await res.json().catch(() => null);
+        const result = await parseContactResponse(res, contactCopy.errorGeneric);
 
-        if (res.ok && data && data.ok) {
+        if (result.kind === 'success') {
           setStatus('success');
           setMessage(contactCopy.success);
           form.reset();
           return;
         }
         setStatus('error');
-        setFieldErrors((data && data.errors) || {});
-        setMessage((data && data.error) || contactCopy.errorGeneric);
+        setFieldErrors(result.fieldErrors);
+        setMessage(result.message);
       } catch {
         setStatus('error');
         setMessage(contactCopy.errorNetwork);

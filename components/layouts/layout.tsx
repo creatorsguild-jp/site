@@ -2,7 +2,12 @@ import React, { FC } from 'react';
 import Head from 'next/head';
 import Header from './Header';
 import Footer from './Footer';
-import { PageMeta, pageMeta, siteName, siteUrl } from '../../content/site';
+import {
+  PageMeta,
+  composeCanonicalUrl,
+  composePageTitle,
+  pageMeta,
+} from '../../content/site';
 
 type Props = {
   // ページ別メタ（未指定時はホームを既定にする）。
@@ -11,10 +16,8 @@ type Props = {
 };
 
 const Layout: FC<Props> = ({ children, meta = pageMeta.home }) => {
-  // home はブランド名のみ、下層ページは "ページ名 | サイト名"。
-  const isHome = meta.path === '/';
-  const fullTitle = isHome ? siteName : `${meta.title} | ${siteName}`;
-  const ogUrl = `${siteUrl}${meta.path}`;
+  const fullTitle = composePageTitle(meta);
+  const ogUrl = composeCanonicalUrl(meta);
 
   return (
     <div>
@@ -55,7 +58,7 @@ const Layout: FC<Props> = ({ children, meta = pageMeta.home }) => {
           href="/css/top.css"
         />
       </Head>
-      <Header title={'hoge'} />
+      <Header />
       <section className="section">
         <div className="container">{children}</div>
       </section>

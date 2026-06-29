@@ -15,7 +15,8 @@
 | Phase2 リファクタ | `components/{layouts,ui,pages/home}` にパーツ分割（出力不変） | `75b759e` |
 | Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（intro/nav/Hero まで・出力不変） | `d33bbe9` ほか |
 | Phase4 複数ページ化 | `/project /remote /member /contact` 追加・nav 実リンク化・死にアンカー解消 | `142c1fa` |
-| Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | （本コミット） |
+| Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | `b65590b` |
+| Phase7 テスト/リファクタ | Vitest + RTL 導入(58 tests)、Layout の title/url 生成ヘルパー抽出、contact フォームを `lib/contact-form.ts` に切り出し、Header dead code 整理（出力不変） | （本コミット） |
 
 サイト現状: 5ページ（`/ /project/ /remote/ /member/ /contact/`）。`/project /remote /member` は「準備中」雛形、`/contact` は**実働フォーム**（fetch→`/api/contact.php`、honeypot + reCAPTCHA v3 + サーバ側検証）。コードは完成、稼働には下記の秘匿情報入力が必要。
 
@@ -61,6 +62,8 @@ npm run build                                                            # out/ 
 ```bash
 npm install                         # 依存（node_modules は未コミット）
 npm run build                       # 静的エクスポート → out/
+npm test                            # Vitest（58 tests / content/lib/ui/layouts/pages）
+npm run test:coverage               # カバレッジ（content/lib/ui は 100%）
 python3 -m http.server 4173 -d out  # ローカルプレビュー（http://localhost:4173/）
 ./deploy/deploy-ftp.sh              # 本番反映 dry-run（既定・サーバ未変更）
 ./deploy/deploy-ftp.sh --apply      # 本番反映（creatorsguild.info/public_html を置換）

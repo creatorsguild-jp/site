@@ -33,6 +33,20 @@ export type PageMeta = {
   path: string;
 };
 
+// ページ別メタから <title> 文字列を組み立てる。
+//   home  → brand（"クリエイターズギルド Creator's Guild"）のみ
+//   下層  → "ページ名 | クリエイターズギルド Creator's Guild"
+// 出力不変リファクタの過程で、ホームは meta.title("Creator's Guild") ではなく
+// brand 全体を使う既存挙動に合わせる必要があるため明示的に分岐する。
+export function composePageTitle(meta: PageMeta, brand: string = siteName): string {
+  return meta.path === '/' ? brand : `${meta.title} | ${brand}`;
+}
+
+// ページ別メタから canonical / og:url を組み立てる（trailingSlash 付き）。
+export function composeCanonicalUrl(meta: PageMeta, origin: string = siteUrl): string {
+  return `${origin}${meta.path}`;
+}
+
 export const pageMeta = {
   home: {
     title: "Creator's Guild",

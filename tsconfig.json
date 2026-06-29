@@ -28,7 +28,9 @@
     "incremental": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "vitest.config.ts",
+    "tests"
   ],
   "include": [
     "next-env.d.ts",
