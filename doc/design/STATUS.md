@@ -1,13 +1,20 @@
 # 作業ステータス / 再開ガイド（Resume）
 
-> 最終更新: 2026-06-28（Phase5 コード実装完了）。次回はこのファイル + `bd ready` を見れば続きから再開できる。
+> 最終更新: 2026-06-30（Phase6 SEO 補完 + ブランチ運用整備完了）。次回はこのファイル + `bd ready` を見れば続きから再開できる。
 
 ## いまの状態
-- ブランチ: **`develop`**（origin に追従）
+- ブランチ: **`develop`** が開発 trunk（`origin/develop` に追従、HEAD = `abbf389`）
+- リリース用: **`main`**（現在は Initial commit 状態。`develop → main` 初回マージ時は `--allow-unrelated-histories` が必要）
 - プロジェクト: Creator's Guild サイト（Next.js13 Pages Router + 静的エクスポート → XServer FTP 配信）
 - ⚠️ `~/work/git/landlord_php` は**別プロジェクト**（貸主物件.com）。同じ XServer アカウントを共有しているだけ。**触らない**。
+- ローカル設定: `git config --local user.email = 1421370+jangom2ok@users.noreply.github.com`（GitHub の email privacy 対策、消さない）
 
-## 完了済み
+## 運用ルール（2026-06-30 整備）
+- 開発: feature branch を `develop` から派生 → PR → `develop` にマージ → 枝削除
+- リリース: 本番反映時に `develop → main` をマージ
+- commit author/committer email は **noreply 必須**（ローカル config 設定済み）
+
+## 完了済み（all on `develop`、PR #22 で取り込み済 → `origin/develop`）
 | 区分 | 内容 | コミット |
 |---|---|---|
 | デプロイ体制 | `next.config.js`(static export) + `deploy/deploy-ftp.sh`(dry-run/--apply) + `npm run deploy` | `039c02e` |
@@ -16,7 +23,9 @@
 | Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（intro/nav/Hero まで・出力不変） | `00bca78` ほか |
 | Phase4 複数ページ化 | `/project /remote /member /contact` 追加・nav 実リンク化・死にアンカー解消 | `755f88d` |
 | Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | `1667646` |
-| Phase7 テスト/リファクタ | Vitest + RTL 導入(58 tests)、Layout の title/url 生成ヘルパー抽出、contact フォームを `lib/contact-form.ts` に切り出し、Header dead code 整理（出力不変） | （本コミット） |
+| Phase6 SEO 補完 | `robots.txt` / `sitemap.xml` / Organization+WebSite JSON-LD（XSS-safe serializer） | `7526250` |
+| Phase7 テスト/リファクタ | Vitest + RTL 導入(77 tests)、Layout の title/url 生成ヘルパー抽出、contact フォームを `lib/contact-form.ts` に切り出し、Header dead code 整理（出力不変） | `a075eb9` `f7d8138` |
+| ブランチ運用整備 | `develop` trunk + `main` release の二系統、古い枝(`master`/`feature/*`) 削除、Dependabot 旧 PR 8 件 close、commit email を noreply に書き換え | （session 2026-06-30） |
 
 サイト現状: 5ページ（`/ /project/ /remote/ /member/ /contact/`）。`/project /remote /member` は「準備中」雛形、`/contact` は**実働フォーム**（fetch→`/api/contact.php`、honeypot + reCAPTCHA v3 + サーバ側検証）。コードは完成、稼働には下記の秘匿情報入力が必要。
 
@@ -57,14 +66,19 @@ npm run build                                                            # out/ 
 | Lighthouse | ⬜ 未（Chrome 必要） |
 | フォーム実送信テスト | ⬜ 未（本番 SMTP/reCAPTCHA 設定後） |
 
-## その後
-- 本番反映（`site-gwm.3`）: `./deploy/deploy-ftp.sh`（dry-run → `--apply`）。`out/api/` に PHP/vendor が含まれることを確認してから反映（旧2020サイトを置換）
+## 次にユーザー側で必要なアクション（bd open issues）
+- **`site-gwm.9`**: 実機品質確認（要: ブラウザ・Chrome、本番 SMTP+reCAPTCHA キー）
+- **`site-gwm.3`**: 本番反映 `./deploy/deploy-ftp.sh`（dry-run → `--apply`）。`out/api/` に PHP/vendor が含まれることを確認してから反映（旧2020サイトを置換）。リリース完了したら `develop → main` を `--allow-unrelated-histories` でマージ
+
+## 視界の片隅メモ
+- GitHub セキュリティ警告 31 件（Phase4–6 で刷新された依存ツリーに対する再スキャン結果）。数日内に Dependabot から新規 PR が立ち上がる見込み、来てから対応
+- ローカルタグ `backup-before-email-rewrite` は削除済（filter-branch 安全網役目終了）
 
 ## よく使うコマンド
 ```bash
 npm install                         # 依存（node_modules は未コミット）
 npm run build                       # 静的エクスポート → out/
-npm test                            # Vitest（58 tests / content/lib/ui/layouts/pages）
+npm test                            # Vitest（77 tests / content/lib/ui/layouts/pages/integration）
 npm run test:coverage               # カバレッジ（content/lib/ui は 100%）
 python3 -m http.server 4173 -d out  # ローカルプレビュー（http://localhost:4173/）
 ./deploy/deploy-ftp.sh              # 本番反映 dry-run（既定・サーバ未変更）
