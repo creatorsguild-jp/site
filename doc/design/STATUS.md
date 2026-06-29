@@ -3,19 +3,19 @@
 > 最終更新: 2026-06-28（Phase5 コード実装完了）。次回はこのファイル + `bd ready` を見れば続きから再開できる。
 
 ## いまの状態
-- ブランチ: **`chore/ftp-deploy`**（origin 未 push・ローカルコミット済み）
+- ブランチ: **`develop`**（origin に追従）
 - プロジェクト: Creator's Guild サイト（Next.js13 Pages Router + 静的エクスポート → XServer FTP 配信）
 - ⚠️ `~/work/git/landlord_php` は**別プロジェクト**（貸主物件.com）。同じ XServer アカウントを共有しているだけ。**触らない**。
 
 ## 完了済み
 | 区分 | 内容 | コミット |
 |---|---|---|
-| デプロイ体制 | `next.config.js`(static export) + `deploy/deploy-ftp.sh`(dry-run/--apply) + `npm run deploy` | `c42d5a9` |
-| 設計/技術選定 | `doc/design/README.md`(決定 D1–D8) + `tech-selection.md` | `626d939` |
-| Phase2 リファクタ | `components/{layouts,ui,pages/home}` にパーツ分割（出力不変） | `75b759e` |
-| Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（intro/nav/Hero まで・出力不変） | `d33bbe9` ほか |
-| Phase4 複数ページ化 | `/project /remote /member /contact` 追加・nav 実リンク化・死にアンカー解消 | `142c1fa` |
-| Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | `b65590b` |
+| デプロイ体制 | `next.config.js`(static export) + `deploy/deploy-ftp.sh`(dry-run/--apply) + `npm run deploy` | `039c02e` |
+| 設計/技術選定 | `doc/design/README.md`(決定 D1–D8) + `tech-selection.md` | `2957704` |
+| Phase2 リファクタ | `components/{layouts,ui,pages/home}` にパーツ分割（出力不変） | `1324f50` |
+| Phase3 データ化 | `content/{home,site}.ts` にコンテンツ集約（intro/nav/Hero まで・出力不変） | `00bca78` ほか |
+| Phase4 複数ページ化 | `/project /remote /member /contact` 追加・nav 実リンク化・死にアンカー解消 | `755f88d` |
+| Phase5 PHPフォーム(コード) | `public/api/contact.php`(検証/送信) + PHPMailer 同梱 + `/contact` を fetch+reCAPTCHA v3 化 | `1667646` |
 | Phase7 テスト/リファクタ | Vitest + RTL 導入(58 tests)、Layout の title/url 生成ヘルパー抽出、contact フォームを `lib/contact-form.ts` に切り出し、Header dead code 整理（出力不変） | （本コミット） |
 
 サイト現状: 5ページ（`/ /project/ /remote/ /member/ /contact/`）。`/project /remote /member` は「準備中」雛形、`/contact` は**実働フォーム**（fetch→`/api/contact.php`、honeypot + reCAPTCHA v3 + サーバ側検証）。コードは完成、稼働には下記の秘匿情報入力が必要。
