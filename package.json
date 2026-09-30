@@ -14,7 +14,7 @@
     "deploy": "./deploy/deploy-ftp.sh --apply"
   },
   "dependencies": {
-    "next": "^13.4.19",
+    "next": "^15.5.24",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^6.0.7"
